@@ -17,7 +17,7 @@ func setup(hole_center_x: float, hole_width: float):
 	# Atur visual kiri
 	left_part.position.x = 0
 	left_part.size.x = left_end
-
+	
 	# Atur collision kiri
 	var shape_l = col_left.shape as RectangleShape2D
 	shape_l.size = Vector2(left_end, 20)

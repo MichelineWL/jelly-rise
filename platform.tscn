@@ -17,7 +17,7 @@ offset_right = 160.0
 offset_bottom = 20.0
 color = Color(0.101960786, 0.13725491, 0.49411765, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1632951604]
+[node name="CollisionLeft" type="CollisionShape2D" parent="." unique_id=1632951604]
 position = Vector2(80, 10)
 shape = SubResource("RectangleShape2D_5epuj")
 
@@ -27,6 +27,6 @@ offset_left = 320.0
 offset_right = 480.0
 offset_bottom = 20.0
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=439372622]
+[node name="CollisionRight" type="CollisionShape2D" parent="." unique_id=439372622]
 position = Vector2(400, 10)
 shape = SubResource("RectangleShape2D_shh4g")

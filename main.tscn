@@ -2,14 +2,17 @@
 
 [ext_resource type="Script" uid="uid://bp67ogtsbu76l" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://d2xf005wsree6" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bsrb6n0wliv1i" path="res://platform_spawner.gd" id="3_h2yge"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0xm2m"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ig7tw"]
-radius = 37.44329
-
 [node name="Main" type="Node2D" unique_id=1493826099]
 script = ExtResource("1_0xm2m")
+
+[node name="Player" parent="." unique_id=984360294 instance=ExtResource("1_ig7tw")]
+
+[node name="PlatformSpawner" type="Node2D" parent="." unique_id=283338950]
+script = ExtResource("3_h2yge")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1728634134]
 
@@ -21,18 +24,3 @@ offset_bottom = -157.0
 size_flags_horizontal = 0
 text = "Stamina: 100"
 label_settings = SubResource("LabelSettings_0xm2m")
-
-[node name="Player" parent="." unique_id=984360294 instance=ExtResource("1_ig7tw")]
-
-[node name="Obstacle" type="StaticBody2D" parent="." unique_id=641511488]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle" unique_id=521962164]
-position = Vector2(58, 88)
-shape = SubResource("CircleShape2D_ig7tw")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Obstacle" unique_id=600292759]
-position = Vector2(-71, 87)
-shape = SubResource("CircleShape2D_ig7tw")
-disabled = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Obstacle" unique_id=1772411381]
