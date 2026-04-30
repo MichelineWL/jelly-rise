@@ -24,3 +24,19 @@ offset_bottom = -157.0
 size_flags_horizontal = 0
 text = "Stamina: 100"
 label_settings = SubResource("LabelSettings_0xm2m")
+
+[node name="PityOverlay" type="ColorRect" parent="CanvasLayer" unique_id=101625004]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.003921569, 0.003921569, 0)
+
+[node name="EchoLabel" type="Label" parent="CanvasLayer" unique_id=1386837540]
+offset_right = 127.0
+offset_bottom = 23.0
+text = "⚡ ECHO MODE!"
+horizontal_alignment = 1
+vertical_alignment = 1
