@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://ndpmk8afc568"]
+
+[ext_resource type="Script" uid="uid://uoeoj5s0xu4e" path="res://platform.gd" id="1_sltsi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5epuj"]
+size = Vector2(160, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shh4g"]
+size = Vector2(160, 20)
+
+[node name="Platform" type="StaticBody2D" unique_id=18030836]
+script = ExtResource("1_sltsi")
+move_speed = null
+
+[node name="LeftPart" type="ColorRect" parent="." unique_id=2112904525]
+custom_minimum_size = Vector2(160, 20)
+offset_right = 160.0
+offset_bottom = 20.0
+color = Color(0.101960786, 0.13725491, 0.49411765, 1)
+
+[node name="CollisionLeft" type="CollisionShape2D" parent="." unique_id=1632951604]
+position = Vector2(80, 10)
+shape = SubResource("RectangleShape2D_5epuj")
+
+[node name="RightPart" type="ColorRect" parent="." unique_id=314390729]
+custom_minimum_size = Vector2(160, 20)
+offset_left = 320.0
+offset_right = 480.0
+offset_bottom = 20.0
+
+[node name="CollisionRight" type="CollisionShape2D" parent="." unique_id=439372622]
+position = Vector2(400, 10)
+shape = SubResource("RectangleShape2D_shh4g")
