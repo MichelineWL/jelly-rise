@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://ce6fsq8h124h1"]
+
+[ext_resource type="Texture2D" uid="uid://dbhuqnucwbbio" path="res://assets/game_over_bg.png" id="1_bg"]
+[ext_resource type="Texture2D" uid="uid://3ru6orvejyv8" path="res://assets/game_over_text.png" id="2_text"]
+[ext_resource type="Texture2D" uid="uid://cip44u433fvk2" path="res://assets/new_best!_text_final.png" id="4_28vn7"]
+[ext_resource type="Texture2D" uid="uid://crhdut760dgum" path="res://assets/play_again_button.png" id="5_playagain"]
+[ext_resource type="Texture2D" uid="uid://da8o7gwggunjj" path="res://assets/back_to_menu_button.png" id="6_backmenu"]
+[ext_resource type="Script" uid="uid://b5kj8d22b1nug" path="res://game_over.gd" id="7_script"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_score"]
+font_size = 24
+font_color = Color(0.8, 0.9, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_best"]
+font_size = 18
+font_color = Color(0.6, 0.7, 0.8, 1)
+
+[node name="GameOver" type="Control" unique_id=34569011]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_script")
+
+[node name="BG" type="TextureRect" parent="." unique_id=1531539905]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bg")
+stretch_mode = 6
+
+[node name="GameOverText" type="TextureRect" parent="." unique_id=622714669]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -263.0
+offset_top = 164.0
+offset_right = 267.5
+offset_bottom = 291.0
+grow_horizontal = 2
+texture = ExtResource("2_text")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NewBestText" type="TextureRect" parent="." unique_id=114198903]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 0
+offset_left = 61.0
+offset_top = 51.0
+offset_right = 433.0
+offset_bottom = 159.0
+size_flags_horizontal = 4
+texture = ExtResource("4_28vn7")
+stretch_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=987314792]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -234.0
+offset_right = -1.0
+offset_bottom = 445.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=78406109]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="ScorePanel" type="TextureRect" parent="CenterContainer/VBoxContainer" unique_id=656976302]
+custom_minimum_size = Vector2(380, 180)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="ScoreLabel" type="Label" parent="CenterContainer/VBoxContainer/ScorePanel" unique_id=1601681515]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = -23.0
+offset_right = 50.0
+offset_bottom = 11.0
+grow_horizontal = 2
+text = "SCORE"
+label_settings = SubResource("LabelSettings_score")
+horizontal_alignment = 1
+
+[node name="ScoreContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/ScorePanel" unique_id=61177602]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -76.0
+offset_right = 150.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="BestLabel" type="Label" parent="CenterContainer/VBoxContainer/ScorePanel" unique_id=1439693630]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -109.0
+offset_right = 50.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "BEST"
+label_settings = SubResource("LabelSettings_best")
+horizontal_alignment = 1
+
+[node name="BestScoreContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/ScorePanel" unique_id=715251591]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -69.0
+offset_right = 100.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 3
+alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1234122881]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="PlayAgainButton" type="TextureButton" parent="CenterContainer/VBoxContainer/ButtonContainer" unique_id=535390995]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+texture_normal = ExtResource("5_playagain")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BackToMenuButton" type="TextureButton" parent="CenterContainer/VBoxContainer/ButtonContainer" unique_id=520811725]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+texture_normal = ExtResource("6_backmenu")
+ignore_texture_size = true
+stretch_mode = 5

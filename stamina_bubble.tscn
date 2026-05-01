@@ -1,19 +1,16 @@
 [gd_scene format=3 uid="uid://ccal6v3k5juia"]
 
 [ext_resource type="Script" uid="uid://y2fs5h5lbavk" path="res://stamina_bubble.gd" id="1_osc0n"]
+[ext_resource type="Texture2D" uid="uid://bqh7777xm82vh" path="res://assets/stamina2.png" id="2_s1rbg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s1rbg"]
 
 [node name="StaminaBubble" type="Area2D" unique_id=2077434427]
 script = ExtResource("1_osc0n")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=238961574]
-custom_minimum_size = Vector2(20, 20)
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-color = Color(1, 1, 0, 1)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=101512592]
 shape = SubResource("CircleShape2D_s1rbg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1515096587]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_s1rbg")

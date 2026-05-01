@@ -6,7 +6,7 @@ const STAMINA_SCENE = preload("res://stamina_bubble.tscn") # Load item baru
 var spawn_interval := 2.5
 var spawn_timer := 0.0
 var platform_speed := 120.0
-var hole_width := 200.0
+var hole_width := 160.0
 
 func _process(delta):
 	spawn_timer += delta

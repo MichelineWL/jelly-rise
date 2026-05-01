@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ndpmk8afc568"]
 
 [ext_resource type="Script" uid="uid://uoeoj5s0xu4e" path="res://platform.gd" id="1_sltsi"]
+[ext_resource type="Texture2D" uid="uid://6o4s8ougurg5" path="res://assets/platform_final.png" id="2_s8bxr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5epuj"]
 size = Vector2(160, 20)
@@ -11,22 +12,18 @@ size = Vector2(160, 20)
 [node name="Platform" type="StaticBody2D" unique_id=18030836]
 script = ExtResource("1_sltsi")
 
-[node name="LeftPart" type="ColorRect" parent="." unique_id=2112904525]
-custom_minimum_size = Vector2(160, 20)
-offset_right = 160.0
-offset_bottom = 20.0
-color = Color(0.101960786, 0.13725491, 0.49411765, 1)
-
 [node name="CollisionLeft" type="CollisionShape2D" parent="." unique_id=1632951604]
 position = Vector2(80, 10)
 shape = SubResource("RectangleShape2D_5epuj")
 
-[node name="RightPart" type="ColorRect" parent="." unique_id=314390729]
-custom_minimum_size = Vector2(160, 20)
-offset_left = 320.0
-offset_right = 480.0
-offset_bottom = 20.0
-
 [node name="CollisionRight" type="CollisionShape2D" parent="." unique_id=439372622]
 position = Vector2(400, 10)
 shape = SubResource("RectangleShape2D_shh4g")
+
+[node name="LeftPart" type="Sprite2D" parent="." unique_id=1115498117]
+texture = ExtResource("2_s8bxr")
+region_enabled = true
+
+[node name="RightPart" type="Sprite2D" parent="." unique_id=668106084]
+texture = ExtResource("2_s8bxr")
+region_enabled = true

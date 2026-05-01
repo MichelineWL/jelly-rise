@@ -7,6 +7,13 @@ var high_score := 0
 
 func _ready():
 	load_game()
+	# Hapus komentar di bawah ini kalau mau reset score ke 0
+	# reset_high_score()
+
+func reset_high_score():
+	high_score = 0
+	save_game(0)
+	print("High score has been reset to 0!")
 
 func save_game(score: int):
 	var data = {

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c60ixdtly4k2b"]
+
+[ext_resource type="Texture2D" uid="uid://cpf65hq8cpjcv" path="res://assets/main_menu_bg.png" id="1_7vrkn"]
+[ext_resource type="Script" uid="uid://bkk4so146qljn" path="res://main_menu.gd" id="1_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://y1aeecqjd0a0" path="res://assets/play_button_final.png" id="2_7vrkn"]
+
+[node name="MainMenu" type="Control" unique_id=1468254898]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fu7sn")
+
+[node name="BG" type="TextureRect" parent="." unique_id=1771291764]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_7vrkn")
+stretch_mode = 6
+
+[node name="StartButton" type="TextureButton" parent="." unique_id=1369768921]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -190.5
+offset_top = -168.0
+offset_right = 190.5
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("2_7vrkn")

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+@onready var anim = $AnimatedSprite2D 
 
 # === PHYSICS ===
 @export var gravity := 350.0
@@ -81,11 +82,32 @@ func _physics_process(delta):
 	if position.y > 900 and not is_dead:
 		_die()
 
+		# --- LOGIKA ANIMASI JUMP VS SWIM (FIXED) ---
+	if Input.is_action_just_pressed("jump"):
+		anim.play("jump")
+		
+	elif Input.is_action_pressed("jump"):
+		# Kalau animasi jump sudah selesai, baru ganti ke swim
+		if anim.animation == "jump":
+			if not anim.is_playing():
+				anim.play("swim")
+		else:
+			anim.play("swim")
+
+	else:
+		# HANYA TUNGGU FRAME 0 kalau lagi animasi SWIM
+		# Kalau lagi JUMP, biarkan dia selesai sendiri sampai habis (karena Loop Off)
+		if anim.animation == "swim":
+			if anim.is_playing() and anim.frame == 0:
+				anim.stop()
+
+				
 func _check_pity(delta):
 	# Aktifkan kalau jatuh terlalu bawah
 	if position.y > pity_threshold and not is_pity_active:
 		is_pity_active = true
 		pity_timer = pity_duration
+		AudioManager.play_sfx("echo")
 	
 	if is_pity_active:
 		pity_timer -= delta
@@ -95,6 +117,7 @@ func _check_pity(delta):
 # Fungsi ini akan dipanggil oleh item Stamina Bubble
 func add_stamina(amount: float):
 	stamina = clamp(stamina + amount, 0, max_stamina)
+	AudioManager.play_sfx("stamina")
 
 func _die():
 	is_dead = true
