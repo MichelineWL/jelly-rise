@@ -278,13 +278,13 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="CanvasLayer2/TutorialDialog/Panel/ContentContainer" unique_id=1903864845]
 layout_mode = 2
-text = "🌊 Jellyfish bergerak otomatis meliuk kiri & kanan.
+text = "[1] Jellyfish bergerak otomatis meliuk kiri & kanan.
 
-⌨️ Tekan SPACE untuk lompat kecil ke atas.
+[2] Tekan SPACE untuk lompat kecil ke atas.
 
-⏱️ Tahan SPACE untuk boost kuat (Stamina boros).
+[3] Tahan SPACE untuk boost kuat (Stamina boros).
 
-🫧 Ambil Gelembung Stamina untuk bertahan hidup.
+[4] Ambil Gelembung Stamina untuk bertahan hidup.
 "
 horizontal_alignment = 1
 autowrap_mode = 2
