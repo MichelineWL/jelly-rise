@@ -129,6 +129,17 @@ sprite_frames = SubResource("SpriteFrames_ax26h")
 animation = &"jump"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=420591444]
+emitting = false
+amount = 12
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.8
 emission_shape = 2
-emission_sphere_radius = 1.0
+emission_sphere_radius = 10.0
+direction = Vector2(0, -50)
 gravity = Vector2(0, -20)
+initial_velocity_min = 30.0
+initial_velocity_max = 80.0
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+color = Color(0.5019608, 1, 1, 1)

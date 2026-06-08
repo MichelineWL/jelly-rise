@@ -29,6 +29,8 @@ var pity_duration := 5.0   # Berapa lama mode infinite stamina aktif
 signal player_died
 var is_dead := false
 
+
+
 func _ready():
 	position = Vector2(screen_center_x, 300)
 
@@ -122,3 +124,26 @@ func add_stamina(amount: float):
 func _die():
 	is_dead = true
 	emit_signal("player_died")
+
+# Fungsi feedback visual saat mengambil stamina bubble
+func play_take_feedback():
+	# Ambil reference node AnimatedSprite2D milik player
+	if anim:
+		# Hentikan tween scale sebelumnya jika ada agar tidak bentrok
+		var tween = create_tween()
+		# squash & stretch: melebarkan/mengecilkan secara cepat lalu kembali normal
+		# 1. Melebar horizontal (stretch) sejenak
+		tween.tween_property(anim, "scale", Vector2(0.36, 0.24), 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		# 2. Memanjang vertikal sedikit (bounce)
+		tween.tween_property(anim, "scale", Vector2(0.26, 0.34), 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		# 3. Kembali ke ukuran normal (scale awal player adalah 0.3)
+		tween.tween_property(anim, "scale", Vector2(0.3, 0.3), 0.12).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	# 2. Semburkan partikel (Burst particles)
+	var particles = $CPUParticles2D
+	if particles:
+		particles.one_shot = true
+		particles.amount = 12
+		particles.explosiveness = 0.8
+		# restart partikel untuk menembakkannya secara instant
+		particles.restart()
