@@ -62,6 +62,15 @@ corner_radius_bottom_left = 6
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_level_up"]
+font_size = 42
+font_color = Color(1, 0.9, 0.1, 1) # Kuning Terang Neon
+outline_size = 6
+outline_color = Color(0, 0.1, 0.3, 1) # Outline biru gelap kontras
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_offset = Vector2(3, 3)
+
 [node name="Main" type="Node2D" unique_id=1493826099]
 script = ExtResource("1_0xm2m")
 
@@ -140,6 +149,26 @@ offset_right = 104.0
 offset_bottom = 116.0
 grow_horizontal = 2
 alignment = 1
+
+[node name="LevelUpLabel" type="Label" parent="CanvasLayer" unique_id=29381023]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -50.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 50)
+text = "LEVEL UP!"
+label_settings = SubResource("LabelSettings_level_up")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 
 [node name="PauseOverlay" type="ColorRect" parent="CanvasLayer" unique_id=1640835465]
 process_mode = 3

@@ -10,6 +10,8 @@ extends Node2D
 @onready var score_display = $CanvasLayer/ScoreDisplay
 @onready var pause_overlay = $CanvasLayer/PauseOverlay
 @onready var tutorial_dialog = $CanvasLayer2/TutorialDialog
+@onready var level_up_label = $CanvasLayer/LevelUpLabel
+
 
 const NUMBERS_TEXTURE = preload("res://assets/numbers.png")
 const DIGIT_COUNT := 10
@@ -114,6 +116,27 @@ func _level_up():
 	spawner.spawn_interval = max(0.9, spawner.spawn_interval - 0.2)
 	spawner.hole_width = max(80.0, spawner.hole_width - 15.0)
 	AudioManager.play_sfx("level_up")
+	
+	# Efek Animasi Teks Level Up
+	if level_up_label:
+		level_up_label.text = "LEVEL " + str(level)
+		level_up_label.visible = true
+		level_up_label.modulate.a = 0.0
+		level_up_label.scale = Vector2(0.5, 0.5) # Mulai dari kecil
+		
+		# Buat Tween untuk menganimasikan teks membesar dan memudar halus
+		var tween = create_tween().set_parallel(true)
+		# 1. Animasi membesar ke scale normal (1.0) & memudar masuk (fade-in)
+		tween.tween_property(level_up_label, "scale", Vector2(1.0, 1.0), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.tween_property(level_up_label, "modulate:a", 1.0, 0.3)
+		
+		# Setelah 0.6 detik tampil di layar, animasikan memudar keluar (fade-out)
+		var fade_out_tween = create_tween()
+		fade_out_tween.tween_interval(0.8)
+		fade_out_tween.tween_property(level_up_label, "modulate:a", 0.0, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		fade_out_tween.finished.connect(func():
+			level_up_label.visible = false
+		)
 
 func _toggle_pause():
 	is_paused = !is_paused
