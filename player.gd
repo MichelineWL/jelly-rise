@@ -124,6 +124,21 @@ func add_stamina(amount: float):
 func _die():
 	is_dead = true
 	emit_signal("player_died")
+	
+	# Matikan deteksi tabrakan agar ubur-ubur tidak menabrak rintangan lain saat jatuh mati
+	set_collision_layer_value(1, false)
+	set_collision_mask_value(1, false)
+	
+	# Efek Animasi Kematian Jellyfish yang dramatis menggunakan Tween:
+	if anim:
+		var tween = create_tween().set_parallel(true)
+		# 1. Putar ubur-ubur miring 90 derajat ke samping secara perlahan (1.2 detik)
+		tween.tween_property(anim, "rotation_degrees", 90.0, 1.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		# 2. Animasikan mengecil perlahan ke nol
+		tween.tween_property(anim, "scale", Vector2.ZERO, 1.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	
+	# Dorong ke bawah sedikit sebelum tenggelam
+	velocity = Vector2(0, 100)
 
 # Fungsi feedback visual saat mengambil stamina bubble
 func play_take_feedback():
