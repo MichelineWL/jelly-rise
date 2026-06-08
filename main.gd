@@ -9,6 +9,9 @@ extends Node2D
 @onready var pause_button = $CanvasLayer/PauseButton
 @onready var score_display = $CanvasLayer/ScoreDisplay
 @onready var pause_overlay = $CanvasLayer/PauseOverlay
+@onready var tutorial_dialog = $CanvasLayer2/TutorialDialog
+@onready var level_up_label = $CanvasLayer/LevelUpLabel
+
 
 const NUMBERS_TEXTURE = preload("res://assets/numbers.png")
 const DIGIT_COUNT := 10
@@ -17,7 +20,7 @@ var digit_height : float
 
 var score := 0.0
 var level := 1
-var game_active := true
+var game_active := false
 var is_paused := false
 
 func _ready():
@@ -26,6 +29,20 @@ func _ready():
 	echo_label.visible = false
 	pause_overlay.visible = false
 	
+	if tutorial_dialog:
+		tutorial_dialog.visible = true
+		# Dapatkan parent CanvasLayer2 agar semua komponen di dalamnya tetap merespon klik ketika paused
+		var layer = tutorial_dialog.get_parent()
+		if layer:
+			layer.process_mode = PROCESS_MODE_ALWAYS
+		
+		get_tree().paused = true
+		var start_btn = tutorial_dialog.get_node_or_null("Panel/ContentContainer/StartButton")
+		if start_btn:
+			start_btn.pressed.connect(_start_game)
+	else:
+		game_active = true
+	
 	var tex_size = NUMBERS_TEXTURE.get_size()
 	digit_width = tex_size.x / float(DIGIT_COUNT)
 	digit_height = tex_size.y
@@ -33,7 +50,21 @@ func _ready():
 	pause_button.pressed.connect(_toggle_pause)
 	pause_overlay.gui_input.connect(_on_pause_overlay_input)
 	
+	# Hubungkan tombol ResumeButton baru
+	var resume_btn = pause_overlay.get_node_or_null("Panel/VBoxContainer/ResumeButton")
+	if resume_btn:
+		resume_btn.pressed.connect(_toggle_pause)
+	
 	_update_score_display(0)
+	
+# Fungsi memulai game:
+func _start_game():
+	if not tutorial_dialog: return
+	
+	# Sembunyikan dialog secepatnya agar game tidak stuck
+	tutorial_dialog.visible = false
+	get_tree().paused = false
+	game_active = true
 
 func _process(delta):
 	if not game_active or is_paused: return
@@ -85,6 +116,27 @@ func _level_up():
 	spawner.spawn_interval = max(0.9, spawner.spawn_interval - 0.2)
 	spawner.hole_width = max(80.0, spawner.hole_width - 15.0)
 	AudioManager.play_sfx("level_up")
+	
+	# Efek Animasi Teks Level Up
+	if level_up_label:
+		level_up_label.text = "LEVEL " + str(level)
+		level_up_label.visible = true
+		level_up_label.modulate.a = 0.0
+		level_up_label.scale = Vector2(0.5, 0.5) # Mulai dari kecil
+		
+		# Buat Tween untuk menganimasikan teks membesar dan memudar halus
+		var tween = create_tween().set_parallel(true)
+		# 1. Animasi membesar ke scale normal (1.0) & memudar masuk (fade-in)
+		tween.tween_property(level_up_label, "scale", Vector2(1.0, 1.0), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.tween_property(level_up_label, "modulate:a", 1.0, 0.3)
+		
+		# Setelah 0.6 detik tampil di layar, animasikan memudar keluar (fade-out)
+		var fade_out_tween = create_tween()
+		fade_out_tween.tween_interval(0.8)
+		fade_out_tween.tween_property(level_up_label, "modulate:a", 0.0, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		fade_out_tween.finished.connect(func():
+			level_up_label.visible = false
+		)
 
 func _toggle_pause():
 	is_paused = !is_paused
