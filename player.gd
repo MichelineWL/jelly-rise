@@ -55,25 +55,26 @@ func _physics_process(delta):
 			velocity.y += (hold_force * 1.8) * delta
 			if not is_pity_active: stamina -= hold_cost * delta
 			
-			# Visual Feedback: Buat gelembung semburan trace bergerak lebih cepat & banyak saat nge-boost
+			# Visual Feedback: Buat gelembung semburan trace bergerak lebih cepat saat nge-boost
 			if $CPUParticles2D_Trace:
-				$CPUParticles2D_Trace.amount = 30
-				$CPUParticles2D_Trace.gravity = Vector2(0, 150) # Semburan cepat ke bawah
+				$CPUParticles2D_Trace.speed_scale = 2.0
 		else:
 			# Kecepatan boost berkurang drastis kalau stamina habis
 			velocity.y += (hold_force * 0.1) * delta
 			if $CPUParticles2D_Trace:
-				$CPUParticles2D_Trace.amount = 8
-				$CPUParticles2D_Trace.gravity = Vector2(0, 40)
+				$CPUParticles2D_Trace.speed_scale = 0.5
 	else:
 		# Kembalikan ke setelan gelembung tenang saat diam/melayang biasa
 		if $CPUParticles2D_Trace:
-			$CPUParticles2D_Trace.amount = 16
-			$CPUParticles2D_Trace.gravity = Vector2(0, 40)
+			$CPUParticles2D_Trace.speed_scale = 1.0
 			
 		# Regen: 5x lebih cepat kalau lagi Echo Mode
 		var current_regen = regen_rate * (5.0 if is_pity_active else 1.0)
 		stamina += current_regen * delta
+		
+	# Pastikan trace partikel selalu memancar secara aktif saat bergerak
+	if not is_dead and $CPUParticles2D_Trace:
+		$CPUParticles2D_Trace.emitting = true
 		
 	stamina = clamp(stamina, 0, max_stamina)
 
