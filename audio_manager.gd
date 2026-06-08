@@ -8,6 +8,12 @@ func _ready():
 	bgm_player.stream = preload("res://audio/background_music.mp3")
 	bgm_player.bus = "Master"
 	bgm_player.process_mode = Node.PROCESS_MODE_ALWAYS # Biar musik tetep jalan walau pause
+	
+	# Hubungkan sinyal finished agar musik memutar ulang secara otomatis (looping)
+	bgm_player.finished.connect(func():
+		bgm_player.play()
+	)
+	
 	bgm_player.play()
 	
 func start_bgm():
