@@ -16,6 +16,52 @@ shadow_offset = Vector2(2, 2)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0, 0.78431374, 0.34509805, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tutorial_panel"]
+bg_color = Color(0.05, 0.1, 0.18, 0.9)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.8, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_tutorial_title"]
+font_size = 22
+font_color = Color(0.95, 0.85, 0.3, 1)
+outline_color = Color(0.05, 0.1, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+bg_color = Color(0, 0.45, 0.6, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+bg_color = Color(0, 0.3, 0.45, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0, 0.6, 0.8, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
 [node name="Main" type="Node2D" unique_id=1493826099]
 script = ExtResource("1_0xm2m")
 
@@ -132,3 +178,71 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_1bvp3")
 stretch_mode = 6
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=729596885]
+process_mode = 3
+
+[node name="TutorialDialog" type="ColorRect" parent="CanvasLayer2" unique_id=1047140459]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.6666667)
+
+[node name="Panel" type="Panel" parent="CanvasLayer2/TutorialDialog" unique_id=2116150210]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -190.0
+offset_right = 180.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(190, 200)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_tutorial_panel")
+
+[node name="ContentContainer" type="VBoxContainer" parent="CanvasLayer2/TutorialDialog/Panel" unique_id=249936991]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer2/TutorialDialog/Panel/ContentContainer" unique_id=1220911934]
+layout_mode = 2
+text = "CARA BERMAIN"
+label_settings = SubResource("LabelSettings_tutorial_title")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer2/TutorialDialog/Panel/ContentContainer" unique_id=1903864845]
+layout_mode = 2
+text = "🌊 Jellyfish bergerak otomatis meliuk kiri & kanan.
+
+⌨️ Tekan SPACE untuk lompat kecil ke atas.
+
+⏱️ Tahan SPACE untuk boost kuat (Stamina boros).
+
+🫧 Ambil Gelembung Stamina untuk bertahan hidup.
+"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="CanvasLayer2/TutorialDialog/Panel/ContentContainer" unique_id=1150011769]
+process_mode = 3
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "MULAI ASCENT"

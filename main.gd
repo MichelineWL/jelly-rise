@@ -9,6 +9,7 @@ extends Node2D
 @onready var pause_button = $CanvasLayer/PauseButton
 @onready var score_display = $CanvasLayer/ScoreDisplay
 @onready var pause_overlay = $CanvasLayer/PauseOverlay
+@onready var tutorial_dialog = $CanvasLayer2/TutorialDialog
 
 const NUMBERS_TEXTURE = preload("res://assets/numbers.png")
 const DIGIT_COUNT := 10
@@ -17,7 +18,7 @@ var digit_height : float
 
 var score := 0.0
 var level := 1
-var game_active := true
+var game_active := false
 var is_paused := false
 
 func _ready():
@@ -25,6 +26,20 @@ func _ready():
 	stamina_bar.max_value = 100
 	echo_label.visible = false
 	pause_overlay.visible = false
+	
+	if tutorial_dialog:
+		tutorial_dialog.visible = true
+		# Dapatkan parent CanvasLayer2 agar semua komponen di dalamnya tetap merespon klik ketika paused
+		var layer = tutorial_dialog.get_parent()
+		if layer:
+			layer.process_mode = PROCESS_MODE_ALWAYS
+		
+		get_tree().paused = true
+		var start_btn = tutorial_dialog.get_node_or_null("Panel/ContentContainer/StartButton")
+		if start_btn:
+			start_btn.pressed.connect(_start_game)
+	else:
+		game_active = true
 	
 	var tex_size = NUMBERS_TEXTURE.get_size()
 	digit_width = tex_size.x / float(DIGIT_COUNT)
@@ -34,6 +49,15 @@ func _ready():
 	pause_overlay.gui_input.connect(_on_pause_overlay_input)
 	
 	_update_score_display(0)
+	
+# Fungsi memulai game:
+func _start_game():
+	if not tutorial_dialog: return
+	
+	# Sembunyikan dialog secepatnya agar game tidak stuck
+	tutorial_dialog.visible = false
+	get_tree().paused = false
+	game_active = true
 
 func _process(delta):
 	if not game_active or is_paused: return
