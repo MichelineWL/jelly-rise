@@ -143,29 +143,50 @@ alignment = 1
 
 [node name="PauseOverlay" type="ColorRect" parent="CanvasLayer" unique_id=1640835465]
 process_mode = 3
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.4)
+color = Color(0, 0, 0, 0.5)
 
-[node name="Label" type="Label" parent="CanvasLayer/PauseOverlay" unique_id=2084958470]
+[node name="Panel" type="Panel" parent="CanvasLayer/PauseOverlay" unique_id=9871624]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -11.5
-offset_right = 50.0
-offset_bottom = 11.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "PAUSED"
+theme_override_styles/panel = SubResource("StyleBoxFlat_tutorial_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseOverlay/Panel" unique_id=10294871]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 55.0
+offset_right = 228.0
+offset_bottom = 147.0
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseOverlay/Panel/VBoxContainer" unique_id=2084958470]
+layout_mode = 2
+text = "GAME PAUSED
+"
+label_settings = SubResource("LabelSettings_tutorial_title")
 horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="CanvasLayer/PauseOverlay/Panel/VBoxContainer" unique_id=102948123]
+process_mode = 3
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "RESUME"
 
 [node name="BGLayer" type="CanvasLayer" parent="." unique_id=834432285]
 layer = -1

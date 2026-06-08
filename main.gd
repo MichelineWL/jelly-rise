@@ -48,6 +48,11 @@ func _ready():
 	pause_button.pressed.connect(_toggle_pause)
 	pause_overlay.gui_input.connect(_on_pause_overlay_input)
 	
+	# Hubungkan tombol ResumeButton baru
+	var resume_btn = pause_overlay.get_node_or_null("Panel/VBoxContainer/ResumeButton")
+	if resume_btn:
+		resume_btn.pressed.connect(_toggle_pause)
+	
 	_update_score_display(0)
 	
 # Fungsi memulai game:
