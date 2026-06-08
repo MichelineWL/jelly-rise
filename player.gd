@@ -33,6 +33,7 @@ var is_dead := false
 
 func _ready():
 	position = Vector2(screen_center_x, 300)
+	$CPUParticles2D_Trace.emitting = true
 
 func _physics_process(delta):
 	if is_dead: return
@@ -160,5 +161,4 @@ func play_take_feedback():
 		particles.one_shot = true
 		particles.amount = 12
 		particles.explosiveness = 0.8
-		# restart partikel untuk menembakkannya secara instant
 		particles.restart()
