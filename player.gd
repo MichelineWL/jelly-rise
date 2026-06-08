@@ -43,25 +43,38 @@ func _physics_process(delta):
 	velocity.y = min(velocity.y, max_fall_speed)
 
 	# --- INPUT & STAMINA LOGIC ---
-	# Jump: Hanya bisa kalau stamina cukup ATAU lagi Echo Mode
+	# 1. Tap Space (Jump):
 	if Input.is_action_just_pressed("jump"):
 		if stamina >= jump_cost or is_pity_active:
 			velocity.y = jump_force
 			if not is_pity_active: stamina -= jump_cost
-
-	# Boost (Hold):
+	# 2. Hold Space (Boost):
 	if Input.is_action_pressed("jump"):
 		if (stamina > 0 or is_pity_active):
-			velocity.y += hold_force * delta
+			# Naikkan kekuatan hold_force secara dinamis agar dorongan ke atas terasa kuat
+			velocity.y += (hold_force * 1.8) * delta
 			if not is_pity_active: stamina -= hold_cost * delta
+			
+			# Visual Feedback: Buat gelembung semburan trace bergerak lebih cepat & banyak saat nge-boost
+			if $CPUParticles2D_Trace:
+				$CPUParticles2D_Trace.amount = 30
+				$CPUParticles2D_Trace.gravity = Vector2(0, 150) # Semburan cepat ke bawah
 		else:
 			# Kecepatan boost berkurang drastis kalau stamina habis
-			velocity.y += (hold_force * 0.1) * delta 
+			velocity.y += (hold_force * 0.1) * delta
+			if $CPUParticles2D_Trace:
+				$CPUParticles2D_Trace.amount = 8
+				$CPUParticles2D_Trace.gravity = Vector2(0, 40)
 	else:
+		# Kembalikan ke setelan gelembung tenang saat diam/melayang biasa
+		if $CPUParticles2D_Trace:
+			$CPUParticles2D_Trace.amount = 16
+			$CPUParticles2D_Trace.gravity = Vector2(0, 40)
+			
 		# Regen: 5x lebih cepat kalau lagi Echo Mode
 		var current_regen = regen_rate * (5.0 if is_pity_active else 1.0)
 		stamina += current_regen * delta
-
+		
 	stamina = clamp(stamina, 0, max_stamina)
 
 	# --- OSCILLATE X ---
